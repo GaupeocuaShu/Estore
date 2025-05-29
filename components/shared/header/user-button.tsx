@@ -13,6 +13,7 @@ import {
 import { signOutUser } from "@/lib/actions/user.action";
 const UserButton = async () => {
   const session = await auth();
+  console.log(session);
   if (!session) {
     return (
       <Button asChild variant="ghost">

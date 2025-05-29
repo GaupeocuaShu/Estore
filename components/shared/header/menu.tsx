@@ -32,11 +32,13 @@ const Menu = () => {
           <SheetContent className="flex flex-col items-start">
             <SheetTitle>Menu</SheetTitle>
             <ModeToggle />
+            {/* Cart  */}
             <Button asChild variant="ghost">
               <Link href="/cart">
                 <ShoppingCart /> Cart
               </Link>
             </Button>
+            {/* User  */}
             <UserButton />
             <SheetDescription></SheetDescription>
           </SheetContent>

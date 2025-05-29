@@ -6,6 +6,7 @@ const Header = () => {
   return (
     <header className="w-full border-b">
       <div className="wrapper flex-between">
+        {/* Logo + App Name */}
         <div className="flex-start">
           <Link href="/" className="flex-start">
             <Image
@@ -20,6 +21,7 @@ const Header = () => {
             </span>
           </Link>
         </div>
+        {/* Cart + User */}
         <div className="space-x-2">
           <Menu />
         </div>

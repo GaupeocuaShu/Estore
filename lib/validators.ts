@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
+import { PAYMENT_METHODS } from "./constants";
 const currency = z
   .string()
   .refine(
@@ -40,3 +41,68 @@ export const signUpFormSchema = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
+// Cart Schemas
+export const cartItemChema = z.object({
+  productId: z.string().min(1, "Product is required"),
+  name: z.string().min(1, "Name is required"),
+  slug: z.string().min(1, "Slug is required"),
+  qty: z.number().int().nonnegative("Quantity must be a pos number"),
+  image: z.string().min(1, "Image is required"),
+  price: currency,
+});
+
+export const insertCartSchema = z.object({
+  items: z.array(cartItemChema),
+  itemsPrice: currency,
+  totalPrice: currency,
+  taxPrice: currency,
+  shippingPrice: currency,
+  sessionCartId: z.string().min(1, "session cart is is required"),
+  userId: z.string().optional().nullable(),
+});
+
+// Schema for shipping address
+export const ShippingAddressSchema = z.object({
+  fullName: z.string().min(3, "Name must be at least 3 characters"),
+  streetAddress: z.string().min(3, "Add must be at least 3 characters"),
+  city: z.string().min(3, "Name must be at least 3 characters"),
+  postalCode: z.string().min(3, "Name must be at least 3 characters"),
+  country: z.string().min(3, "Name must be at least 3 characters"),
+  lat: z.number().optional(),
+  lng: z.number().optional(),
+});
+
+// Schema for payment method
+export const paymentMethodSchema = z
+  .object({
+    type: z.string().min(1, "Payment method is required"),
+  })
+  .refine((data) => PAYMENT_METHODS.includes(data.type), {
+    path: ["type"],
+    message: "invalid payment method",
+  });
+
+// schema for inserting order
+export const insertOrderSchema = z.object({
+  userId: z.string().min(1, "User is required"),
+  itemsPrice: currency,
+  shippingPrice: currency,
+  taxPrice: currency,
+  totalPrice: currency,
+  paymentMethod: z.string().refine((data) => PAYMENT_METHODS.includes(data), {
+    message: "Invalid Payment Method",
+  }),
+  shippingAddress: ShippingAddressSchema,
+});
+
+// Schema for inserting an order Item
+
+export const insertOrderItemSchema = z.object({
+  productId: z.string(),
+  slug: z.string(),
+  image: z.string(),
+  name: z.string(),
+  price: currency,
+  qty: z.number(),
+});
