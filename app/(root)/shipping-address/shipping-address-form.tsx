@@ -1,5 +1,5 @@
 "use client";
-import { zodResolver, ZodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ControllerRenderProps,
   Form,
@@ -64,8 +64,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                   field,
                 }: {
                   field: ControllerRenderProps<
-                    z.infer<typeof ShippingAddressSchema>,
-                    "fullName"
+                    z.infer<typeof ShippingAddressSchema>
                   >;
                 }) => (
                   <FormItem className="w-full">
@@ -85,8 +84,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                   field,
                 }: {
                   field: ControllerRenderProps<
-                    z.infer<typeof ShippingAddressSchema>,
-                    "streetAddress"
+                    z.infer<typeof ShippingAddressSchema>
                   >;
                 }) => (
                   <FormItem className="w-full">
@@ -106,8 +104,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                   field,
                 }: {
                   field: ControllerRenderProps<
-                    z.infer<typeof ShippingAddressSchema>,
-                    "city"
+                    z.infer<typeof ShippingAddressSchema>
                   >;
                 }) => (
                   <FormItem className="w-full">
@@ -127,8 +124,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                   field,
                 }: {
                   field: ControllerRenderProps<
-                    z.infer<typeof ShippingAddressSchema>,
-                    "postalCode"
+                    z.infer<typeof ShippingAddressSchema>
                   >;
                 }) => (
                   <FormItem className="w-full">
@@ -148,12 +144,11 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                   field,
                 }: {
                   field: ControllerRenderProps<
-                    z.infer<typeof ShippingAddressSchema>,
-                    "country"
+                    z.infer<typeof ShippingAddressSchema>
                   >;
                 }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Address</FormLabel>
+                    <FormLabel>Country</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter Country" {...field} />
                     </FormControl>
