@@ -7,6 +7,8 @@ const currency = z
     (value) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(value))),
     "price must have exactly two decimal places"
   );
+
+// Schema for inserting products
 export const insertProductSchema = z.object({
   name: z.string().min(3, "name must be at least 3 character"),
   slug: z.string().min(3, "slug must be at least 3 character"),
@@ -18,6 +20,12 @@ export const insertProductSchema = z.object({
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
   price: currency,
+});
+
+// SChema for updating products
+
+export const updateProductSchema = insertProductSchema.extend({
+  id: z.string().min(1, "Id is required"),
 });
 
 // Scheme for signing users in
@@ -119,4 +127,10 @@ export const paymentResultSchema = z.object({
 export const updateProfileSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
   email: z.string().min(3, "Email must be at least 3 characters"),
+});
+
+// Schema to Update Users
+export const updateUserSchema = updateProfileSchema.extend({
+  id: z.string().min(1, "ID is required"),
+  role: z.string().min(1, "Role is required"),
 });

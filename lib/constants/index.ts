@@ -34,3 +34,22 @@ export const DEFAULT_PAYMENT_METHOD =
   process.env.DEFAULT_PAYMENT_METHOD || "Paypal";
 
 export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 2;
+
+export const productDefaultValues = {
+  name: "",
+  slug: "",
+  category: "",
+  images: [],
+  brand: "",
+  description: "",
+  price: "0",
+  stock: 0,
+  rating: "0",
+  numReviews: "",
+  isFeatured: false,
+  banner: null,
+};
+
+export const USER_ROLES = process.env.USER_ROLES
+  ? process.env.USER_ROLES.split(", ")
+  : ["admin", "user"];
