@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { updateUser } from "@/lib/actions/user.action";
 import { USER_ROLES } from "@/lib/constants";
 import { updateUserSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,8 +35,21 @@ const UpdateUserForm = ({
     resolver: zodResolver(updateUserSchema),
     defaultValues: user,
   });
-  const onSubmit = () => {
-    return;
+  const onSubmit = async (values: z.infer<typeof updateUserSchema>) => {
+    try {
+      const res = await updateUser({
+        ...values,
+        id: user.id,
+      });
+      if (!res.success) {
+        console.log(res.message);
+      }
+      alert(res.message);
+      form.reset();
+      router.push("/admin/users");
+    } catch (error) {
+      console.log((error as Error).message);
+    }
   };
   return (
     <Form {...form}>
